@@ -32,6 +32,14 @@ Déployé depuis l'image généralisée du TP1 (`base-cloud.qcow2`) : user-data/
 
 Code publié : [`TP2/projet/`](TP2/projet/) — `nocloud/` (seeds), `templates/user-data.j2`, `profiles/`, `inventory/vms.yml`, `generated/`, `generate.py`.
 
+## Compétences mises en œuvre
+
+- **Virtualisation** : KVM/QEMU, libvirt (`virt-install`, `virsh`), virtualisation imbriquée, images qcow2 et template généralisé
+- **Provisioning automatisé** : autoinstall Ubuntu (boot direct kernel + seed `cidata`), cloud-init (NoCloud : user-data, meta-data, network-config)
+- **Configuration** : profils YAML (web/db/admin), template Jinja2 + génération Python, nginx, PostgreSQL 16
+- **Systèmes & sécurité** : Ubuntu Server, SSH par clé uniquement (`ssh_pwauth: false`), vérification des checksums officiels
+- **Diagnostic & suivi** : diagnostic cloud-init (`schema`, `analyze`, logs), historique de projet versionné commit par commit
+
 ## Arborescence
 
 ```
