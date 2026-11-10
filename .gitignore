@@ -4,6 +4,9 @@
 *.img
 *.vmdk
 *.vdi
+# Preuves et compte rendu : conservés localement uniquement (non publiés)
+TP1/preuves/
+TP1/RAPPORT.md
 # Fichiers temporaires
 *.tmp
 preuves-tmp-*
