@@ -1,0 +1,39 @@
+# TP1 - 10.2 : creation de la copie et du support de configuration - app01
+
+=== sudo qemu-img convert TEMPLATE -> /var/lib/libvirt/images/ubuntu-app01.qcow2 ===
+    (0.00/100%)    (1.00/100%)    (2.02/100%)    (3.03/100%)    (4.04/100%)    (5.06/100%)    (6.06/100%)    (7.08/100%)    (8.09/100%)    (9.11/100%)    (10.12/100%)    (11.13/100%)    (12.13/100%)    (13.14/100%)    (14.16/100%)    (15.16/100%)    (16.18/100%)    (17.22/100%)    (18.23/100%)    (19.24/100%)    (20.26/100%)    (21.28/100%)    (22.29/100%)    (23.33/100%)    (24.35/100%)    (25.36/100%)    (26.39/100%)    (27.41/100%)    (28.44/100%)    (29.44/100%)    (30.44/100%)    (31.47/100%)    (32.49/100%)    (33.50/100%)    (34.54/100%)    (35.58/100%)    (36.62/100%)    (37.63/100%)    (38.65/100%)    (39.68/100%)    (40.70/100%)    (41.71/100%)    (42.74/100%)    (43.74/100%)    (44.78/100%)    (45.82/100%)    (46.84/100%)    (47.85/100%)    (48.87/100%)    (49.88/100%)    (50.89/100%)    (51.90/100%)    (52.92/100%)    (53.95/100%)    (54.97/100%)    (56.01/100%)    (57.02/100%)    (58.04/100%)    (59.05/100%)    (60.07/100%)    (61.08/100%)    (62.12/100%)    (63.14/100%)    (64.18/100%)    (65.19/100%)    (66.23/100%)    (67.24/100%)    (68.26/100%)    (69.26/100%)    (70.27/100%)    (71.28/100%)    (72.29/100%)    (73.31/100%)    (74.34/100%)    (75.34/100%)    (76.36/100%)    (77.37/100%)    (78.40/100%)    (79.41/100%)    (80.43/100%)    (81.44/100%)    (82.46/100%)    (83.47/100%)    (84.49/100%)    (85.51/100%)    (86.54/100%)    (87.56/100%)    (88.58/100%)    (89.59/100%)    (90.61/100%)    (91.63/100%)    (92.65/100%)    (93.67/100%)    (94.70/100%)    (95.73/100%)    (96.76/100%)    (97.78/100%)    (98.79/100%)    (99.81/100%)    (100.00/100%)    (100.00/100%)
+copie OK
+
+=== sudo virt-sysprep --enable customize -a /var/lib/libvirt/images/ubuntu-app01.qcow2 ===
+[  40.4] Setting a random seed
+[  40.4] Setting the machine ID in /etc/machine-id
+[  40.4] SELinux relabelling
+=== meta-data ===
+instance-id: tp1-ubuntu-app01-v1
+local-hostname: app01
+=== user-data ===
+#cloud-config
+preserve_hostname: false
+hostname: app01
+manage_etc_hosts: true
+ssh_deletekeys: true
+ssh_genkeytypes: [rsa, ecdsa, ed25519]
+ssh_pwauth: false
+disable_root: true
+users:
+ - default
+ - name: etudiant
+   groups: [adm]
+   sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+   shell: /bin/bash
+   lock_passwd: true
+   ssh_authorized_keys:
+   - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHtWjJjlWpzsGYTUiT7DEfPayuN5kZeFymE9zn6QH1rn tp1-kvm
+write_files:
+ - path: /etc/tp-instance
+   permissions: '0644'
+   content: |
+     Instance : app01
+     Reference : ubuntu-template-v1
+183 extents written (0 MB)
+seed copie vers /var/lib/libvirt/boot/ubuntu-app01-seed.iso

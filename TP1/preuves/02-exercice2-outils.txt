@@ -1,0 +1,45 @@
+# TP1 - Exercice 2 : Installer et controler les outils
+# Commandes: sudo apt update && sudo apt install -y qemu-kvm libvirt-daemon-system ...
+Get:1 http://security.ubuntu.com/ubuntu stonking-security InRelease [72.6 kB]
+Hit:2 http://ma.archive.ubuntu.com/ubuntu stonking InRelease
+Get:3 http://ma.archive.ubuntu.com/ubuntu stonking-updates InRelease [66.7 kB]
+Get:4 http://security.ubuntu.com/ubuntu stonking-security/main amd64 Packages [82.9 kB]
+Hit:5 http://ma.archive.ubuntu.com/ubuntu stonking-backports InRelease
+Get:6 http://ma.archive.ubuntu.com/ubuntu stonking-updates/main amd64 Packages [76.9 kB]
+Get:7 http://ma.archive.ubuntu.com/ubuntu stonking-updates/main Translation-en [31.5 kB]
+Get:8 http://security.ubuntu.com/ubuntu stonking-security/main Translation-en [33.4 kB]
+Get:9 http://ma.archive.ubuntu.com/ubuntu stonking-updates/restricted amd64 Packages [30.5 kB]
+Get:10 http://security.ubuntu.com/ubuntu stonking-security/main amd64 Components [208 B]
+Get:11 http://security.ubuntu.com/ubuntu stonking-security/restricted amd64 Packages [30.5 kB]
+Get:12 http://ma.archive.ubuntu.com/ubuntu stonking-updates/restricted Translation-en [13.1 kB]
+Get:13 http://security.ubuntu.com/ubuntu stonking-security/restricted Translation-en [13.1 kB]
+Get:14 http://ma.archive.ubuntu.com/ubuntu stonking-updates/universe amd64 Packages [28.5 kB]
+Get:15 http://ma.archive.ubuntu.com/ubuntu stonking-updates/universe Translation-en [12.7 kB]
+Get:16 http://ma.archive.ubuntu.com/ubuntu stonking-updates/universe amd64 Components [680 B]
+Get:17 http://security.ubuntu.com/ubuntu stonking-security/universe amd64 Packages [29.5 kB]
+Get:18 http://security.ubuntu.com/ubuntu stonking-security/universe Translation-en [13.4 kB]
+Get:19 http://security.ubuntu.com/ubuntu stonking-security/universe amd64 Components [676 B]
+Fetched 537 kB in 1s (363 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Package qemu-kvm is a virtual package provided by:
+  qemu-system-x86-hwe 1:11.0.3+ds-2ubuntu4 (= 1:11.0.3+ds-2ubuntu4)
+  qemu-system-x86 1:11.0.3+ds-2ubuntu2 (= 1:11.0.3+ds-2ubuntu2)
+
+E: Package 'qemu-kvm' has no installation candidate
+
+=== sudo virsh -c qemu:///system list --all ===
+ Id   Name         State
+-----------------------------
+ -    srv-source   shut off
+
+=== command -v des outils ===
+virt-install  : /usr/bin/virt-install
+virt-clone    : /usr/bin/virt-clone
+qemu-img      : /usr/bin/qemu-img
+virt-sysprep  : /usr/bin/virt-sysprep
+genisoimage   : /usr/bin/genisoimage
+=== systemctl is-active libvirtd ===
+active

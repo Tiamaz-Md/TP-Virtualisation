@@ -1,0 +1,55 @@
+# TP1 - Exercice 5 : DANS LA VM (Ubuntu 24.04, srv-source, 192.168.122.44)
+
+=== sudo apt update && sudo apt install -y cloud-init qemu-guest-agent openssh-server ===
+4 481 ko réceptionnés en 4s (1 259 ko/s)
+Lecture des listes de paquets…
+openssh-server est déjà la version la plus récente (1:9.6p1-3ubuntu13.20).
+0 mis à jour, 0 nouvellement installés, 0 à enlever et 29 non mis à jour.
+Created symlink /etc/systemd/system/multi-user.target.wants/ssh.service → /usr/lib/systemd/system/ssh.service.
+paquets et services : OK
+
+=== sudo mkdir -p /opt/tp1 ; echo version v1 ===
+Version applicative TP1 : v1
+
+=== hostnamectl ===
+ Static hostname: srv-source
+       Icon name: computer-vm
+         Chassis: vm 🖴
+      Machine ID: 03b3f2feab29401fb38c4b77286aa9cb
+         Boot ID: c195e2a7534745e68d96fbad296b605b
+  Virtualization: kvm
+Operating System: Ubuntu 24.04.5 LTS
+          Kernel: Linux 6.8.0-149-generic
+    Architecture: x86-64
+ Hardware Vendor: QEMU
+  Hardware Model: Standard PC _Q35 + ICH9, 2009_
+Firmware Version: 1.17.0-debian-1.17.0-1ubuntu2
+   Firmware Date: Tue 2014-04-01
+    Firmware Age: 12y 7month 1w 3d
+=== cat /etc/machine-id ===
+03b3f2feab29401fb38c4b77286aa9cb
+=== ip -br addr ===
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp1s0           UP             192.168.122.44/24 metric 100 fe80::5054:ff:fe87:cb5a/64 
+=== cat /opt/tp1/version.txt ===
+Version applicative TP1 : v1
+=== ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub ===
+256 SHA256:mLujAqRzbj2qaBFqqtQWw/6/HFt1j0qfz4dZvshXz90 root@srv-source (ED25519)
+=== systemctl status qemu-guest-agent --no-pager (5 lignes) ===
+● qemu-guest-agent.service - QEMU Guest Agent
+     Loaded: loaded (/usr/lib/systemd/system/qemu-guest-agent.service; static)
+     Active: active (running) since Tue 2026-11-10 20:50:36 UTC; 9min ago
+   Main PID: 794 (qemu-ga)
+      Tasks: 2 (limit: 2262)
+ Name     MAC address         Protocol   Address
+---------------------------------------------------------------------
+ lo       00:00:00:00:00:00   ipv4       127.0.0.1/8
+ -        -                   ipv6       ::1/128
+ enp1s0   52:54:00:87:cb:5a   ipv4       192.168.122.44/24
+ -        -                   ipv6       fe80::5054:ff:fe87:cb5a/64
+
+ Expiry Time           MAC address         Protocol   IP address          Hostname     Client ID or DUID
+-------------------------------------------------------------------------------------------------------------------------------------------------
+ 2026-11-10 21:50:34   52:54:00:87:cb:5a   ipv4       192.168.122.44/24   srv-source   ff:56:50:4d:98:00:02:00:00:ab:11:12:88:07:6a:3a:00:2e:1f
+ 2026-11-10 21:28:16   52:54:00:91:33:e0   ipv4       192.168.122.37/24   -            ff:56:50:4d:98:00:02:00:00:ab:11:91:1f:8a:00:67:ca:a2:a1
+

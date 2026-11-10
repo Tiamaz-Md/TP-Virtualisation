@@ -1,0 +1,67 @@
+# TP1 - Exercice 11 : Creer, inspecter et convertir RAW/QCOW2 (disques vides)
+
+=== qemu-img create -f raw disque-raw.img 5G ===
+Formatting 'disque-raw.img', fmt=raw size=5368709120
+=== qemu-img create -f qcow2 disque-qcow2.qcow2 5G ===
+Formatting 'disque-qcow2.qcow2', fmt=qcow2 cluster_size=65536 extended_l2=off compression_type=zlib size=5368709120 lazy_refcounts=off refcount_bits=16
+
+=== qemu-img info disque-raw.img ===
+image: disque-raw.img
+file format: raw
+virtual size: 5 GiB (5368709120 bytes)
+disk size: 4 KiB
+Child node '/file':
+    filename: disque-raw.img
+    protocol type: file
+    file length: 5 GiB (5368709120 bytes)
+    disk size: 4 KiB
+=== qemu-img info disque-qcow2.qcow2 ===
+image: disque-qcow2.qcow2
+file format: qcow2
+virtual size: 5 GiB (5368709120 bytes)
+disk size: 196 KiB
+cluster_size: 65536
+Format specific information:
+    compat: 1.1
+    compression type: zlib
+    lazy refcounts: false
+    refcount bits: 16
+    corrupt: false
+    extended l2: false
+Child node '/file':
+    filename: disque-qcow2.qcow2
+    protocol type: file
+    file length: 192 KiB (197120 bytes)
+    disk size: 196 KiB
+
+=== ls -lh disque-* (taille apparente) ===
+-rw-r--r-- 1 tmz tmz 193K Nov 10 21:30 disque-qcow2.qcow2
+-rw-r--r-- 1 tmz tmz 5.0G Nov 10 21:30 disque-raw.img
+=== du -h disque-* (occupation reelle) ===
+196K	disque-qcow2.qcow2
+4.0K	disque-raw.img
+
+=== qemu-img convert -p -f raw -O qcow2 disque-raw.img disque-converti.qcow2 ===
+    (0.00/100%)    (100.00/100%)    (100.00/100%)
+conversion OK
+=== qemu-img info disque-converti.qcow2 ===
+image: disque-converti.qcow2
+file format: qcow2
+virtual size: 5 GiB (5368709120 bytes)
+disk size: 196 KiB
+cluster_size: 65536
+Format specific information:
+    compat: 1.1
+    compression type: zlib
+    lazy refcounts: false
+    refcount bits: 16
+    corrupt: false
+    extended l2: false
+Child node '/file':
+    filename: disque-converti.qcow2
+    protocol type: file
+    file length: 192 KiB (197120 bytes)
+    disk size: 196 KiB
+
+=== qemu-img compare -f raw -F qcow2 disque-raw.img disque-converti.qcow2 ===
+Images are identical.

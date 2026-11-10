@@ -1,0 +1,39 @@
+# TP1 - Exercice 5 : Administrer la source (SUR L'HOTE)
+
+=== sudo virsh -c qemu:///system list --all ===
+ Id   Name          State
+------------------------------
+ 3    ubuntu-vm01   running
+ -    srv-source    shut off
+
+
+=== sudo virsh -c qemu:///system dominfo $VM ===
+Id:             3
+Name:           ubuntu-vm01
+UUID:           03b3f2fe-ab29-401f-b38c-4b77286aa9cb
+OS Type:        hvm
+State:          running
+CPU(s):         2
+CPU time:       25.3s
+Max memory:     2097152 KiB
+Used memory:    2097152 KiB
+Persistent:     yes
+Autostart:      disable
+Autostart Once: disable
+Managed save:   no
+Security model: apparmor
+Security DOI:   0
+Security label: libvirt-03b3f2fe-ab29-401f-b38c-4b77286aa9cb (enforcing)
+
+
+=== sudo virsh -c qemu:///system domblklist $VM ===
+ Target   Source
+-----------------------------------------------------
+ vda      /var/lib/libvirt/images/ubuntu-vm01.qcow2
+
+
+=== sudo virsh -c qemu:///system domiflist $VM ===
+ Interface   Type      Source    Model    MAC
+-------------------------------------------------------------
+ vnet2       network   default   virtio   52:54:00:87:cb:5a
+

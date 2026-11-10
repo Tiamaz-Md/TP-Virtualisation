@@ -1,0 +1,11 @@
+# Images et ISO volumineuses (restent sur l'hôte)
+*.iso
+*.qcow2
+*.img
+*.vmdk
+*.vdi
+# Fichiers temporaires
+*.tmp
+preuves-tmp-*
+vm01-screen.png
+clone-write-out.txt

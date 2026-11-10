@@ -1,0 +1,34 @@
+# TP1 - 10.3 : creation de la VM ubuntu-app01 depuis le disque prepare
+
+=== sudo virt-install --import (app01) ===
+Starting install...
+Creating domain...                                          |         00:00     
+Domain creation completed.
+IP app01 = 192.168.122.41
+SSH par cle tp1_kvm OK
+
+=== DANS CHAQUE INSTANCE : app01 (192.168.122.41) ===
+--- sudo cloud-init status --wait ---
+status: done
+--- status --long ---
+status: done
+extended_status: done
+boot_status_code: enabled-by-generator
+last_update: Thu, 01 Jan 1970 00:00:11 +0000
+detail: DataSourceNoCloud [seed=/dev/sr0]
+errors: []
+recoverable_errors: {}
+--- hostnamectl --static ---
+app01
+--- machine-id ---
+075ec049f0814796ecb58fc5f2850591
+--- ip -br addr ---
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp1s0           UP             192.168.122.41/24 metric 100 fe80::5054:ff:fefe:e5b6/64 
+--- /etc/tp-instance ---
+Instance : app01
+Reference : ubuntu-template-v1
+--- /opt/tp1/version.txt ---
+Version applicative TP1 : v1
+--- empreinte ssh hote ---
+256 SHA256:bc2m1Qd9rf5Z7qS+dkDph6vuBfmUiiDDvICibrdNJAQ root@app01 (ED25519)

@@ -1,0 +1,37 @@
+# TP1 - Exercice 6 : Conflit d'IP observe (les 2 VM simultanees)
+
+=== net-dhcp-leases default (les deux MAC sur la MEME IP .44) ===
+ Expiry Time           MAC address         Protocol   IP address          Hostname     Client ID or DUID
+-------------------------------------------------------------------------------------------------------------------------------------------------
+ 2026-11-10 21:28:16   52:54:00:91:33:e0   ipv4       192.168.122.37/24   -            ff:56:50:4d:98:00:02:00:00:ab:11:91:1f:8a:00:67:ca:a2:a1
+ 2026-11-10 22:02:14   52:54:00:c7:76:ca   ipv4       192.168.122.44/24   srv-source   ff:56:50:4d:98:00:02:00:00:ab:11:12:88:07:6a:3a:00:2e:1f
+
+
+=== Arret des 2 VM pour test successif ===
+Domain 'ubuntu-vm01' is being shutdown
+
+Domain 'ubuntu-vm02' is being shutdown
+
+ubuntu-vm01 : arret effectif
+ubuntu-vm02 : arret effectif
+
+=== Demarrage CLONE seul ===
+Domain 'ubuntu-vm02' started
+
+IP clone seul = 192.168.122.44
+
+=== DANS LE CLONE : modification propre ===
+echo "Modification propre au clone" | sudo tee /opt/tp1/clone.txt
+
+=== Demarrage SOURCE seul : verification absence clone.txt ===
+Domain 'ubuntu-vm01' started
+
+IP source seul = 192.168.122.44
+Disques independants : controle reussi
+
+=== Test d'independance des disques ===
+Dans le clone (ubuntu-vm02, MAC 52:54:00:c7:76:ca, IP 192.168.122.44) :
+  echo "Modification propre au clone" | sudo tee /opt/tp1/clone.txt  -> OK
+  cat /opt/tp1/clone.txt -> Modification propre au clone
+Dans la source (ubuntu-vm01, MAC 52:54:00:87:cb:5a) :
+  test ! -e /opt/tp1/clone.txt  =>  Disques independants : controle reussi

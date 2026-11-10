@@ -1,0 +1,21 @@
+VM=ubuntu-vm01
+CLONE=ubuntu-vm02
+DISK=/var/lib/libvirt/images/ubuntu-vm01.qcow2
+=== VM preexistante srv-source (non utilisee, laissee intacte) ===
+image: /var/lib/libvirt/images/srv-source.qcow2
+file format: qcow2
+virtual size: 10 GiB (10737418240 bytes)
+disk size: 78.5 MiB
+cluster_size: 65536
+Format specific information:
+    compat: 1.1
+    compression type: zlib
+    lazy refcounts: true
+    refcount bits: 16
+    corrupt: false
+    extended l2: false
+Child node '/file':
+    filename: /var/lib/libvirt/images/srv-source.qcow2
+    protocol type: file
+    file length: 10 GiB (10739318784 bytes)
+    disk size: 78.5 MiB

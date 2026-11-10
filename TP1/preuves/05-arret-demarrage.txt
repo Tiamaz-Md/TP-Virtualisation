@@ -1,0 +1,13 @@
+# TP1 - Exercice 5 : Test d'arret et de redemarrage
+
+=== sudo virsh shutdown $VM ===
+Domain 'ubuntu-vm01' is being shutdown
+
+=== suivi domstate ===
+21:00:05 running
+21:00:09 shut off
+=== sudo virsh start $VM ===
+Domain 'ubuntu-vm01' started
+
+running
+

@@ -1,0 +1,27 @@
+# TP1 - Exercice 6 : Observer avant de corriger (DANS CHAQUE VM)
+
+=== SOURCE (192.168.122.44) ===
+-- hostnamectl --static --
+srv-source
+-- cat /etc/machine-id --
+03b3f2feab29401fb38c4b77286aa9cb
+-- ip -br addr --
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp1s0           UP             192.168.122.44/24 metric 100 fe80::5054:ff:fec7:76ca/64 
+-- cat /opt/tp1/version.txt --
+Version applicative TP1 : v1
+-- ssh-keygen -lf ssh_host_ed25519_key.pub --
+256 SHA256:mLujAqRzbj2qaBFqqtQWw/6/HFt1j0qfz4dZvshXz90 root@srv-source (ED25519)
+
+=== CLONE (192.168.122.44) ===
+-- hostnamectl --static --
+srv-source
+-- cat /etc/machine-id --
+03b3f2feab29401fb38c4b77286aa9cb
+-- ip -br addr --
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp1s0           UP             192.168.122.44/24 metric 100 fe80::5054:ff:fec7:76ca/64 
+-- cat /opt/tp1/version.txt --
+Version applicative TP1 : v1
+-- ssh-keygen -lf ssh_host_ed25519_key.pub --
+256 SHA256:mLujAqRzbj2qaBFqqtQWw/6/HFt1j0qfz4dZvshXz90 root@srv-source (ED25519)

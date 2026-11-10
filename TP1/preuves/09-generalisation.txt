@@ -1,0 +1,42 @@
+# TP1 - Exercice 9 : Generaliser une copie, jamais l'original
+
+=== domstate $VM ===
+shut off
+
+=== sudo qemu-img convert -p -f qcow2 -O qcow2 $DISK $TEMPLATE ===
+    (0.00/100%)    (1.00/100%)    (2.04/100%)    (3.04/100%)    (4.05/100%)    (5.05/100%)    (6.05/100%)    (7.09/100%)    (8.09/100%)    (9.11/100%)    (10.15/100%)    (11.18/100%)    (12.20/100%)    (13.21/100%)    (14.21/100%)    (15.22/100%)    (16.24/100%)    (17.27/100%)    (18.27/100%)    (19.28/100%)    (20.31/100%)    (21.35/100%)    (22.36/100%)    (23.36/100%)    (24.36/100%)    (25.38/100%)    (26.38/100%)    (27.41/100%)    (28.45/100%)    (29.45/100%)    (30.49/100%)    (31.52/100%)    (32.56/100%)    (33.57/100%)    (34.57/100%)    (35.58/100%)    (36.61/100%)    (37.64/100%)    (38.66/100%)    (39.66/100%)    (40.66/100%)    (41.69/100%)    (42.71/100%)    (43.72/100%)    (44.73/100%)    (45.74/100%)    (46.74/100%)    (47.75/100%)    (48.75/100%)    (49.77/100%)    (50.81/100%)    (51.81/100%)    (52.83/100%)    (53.84/100%)    (54.85/100%)    (55.87/100%)    (56.88/100%)    (57.91/100%)    (58.94/100%)    (59.98/100%)    (60.98/100%)    (62.02/100%)    (63.06/100%)    (64.06/100%)    (65.08/100%)    (66.08/100%)    (67.12/100%)    (68.13/100%)    (69.16/100%)    (70.16/100%)    (71.20/100%)    (72.20/100%)    (73.20/100%)    (74.20/100%)    (75.21/100%)    (76.25/100%)    (77.26/100%)    (78.30/100%)    (79.30/100%)    (80.32/100%)    (81.32/100%)    (82.33/100%)    (83.34/100%)    (84.35/100%)    (85.35/100%)    (86.38/100%)    (87.38/100%)    (88.39/100%)    (89.43/100%)    (90.43/100%)    (91.44/100%)    (92.46/100%)    (93.50/100%)    (94.51/100%)    (95.54/100%)    (96.57/100%)    (97.58/100%)    (98.60/100%)    (99.61/100%)    (100.00/100%)    (100.00/100%)
+conversion OK
+
+=== Correction hors ligne : suppression de /etc/cloud/cloud-init.disabled ===
+[  33.0] SELinux relabelling
+[  33.0] Finishing off
+=== virt-sysprep --list-operations (operations utilisees presentes ?) ===
+bash-history * Remove the bash history in the guest
+logfiles * Remove many log files from the guest
+machine-id * Remove the local machine ID
+ssh-hostkeys * Remove the SSH host keys in the guest
+tmp-files * Remove temporary files
+udev-persistent-net * Remove udev persistent net rules
+=== sudo virt-sysprep -a $TEMPLATE --operations ... ===
+[   2.3] Performing "bash-history" ...
+[   2.3] Performing "logfiles" ...
+[   2.9] Performing "machine-id" ...
+[   2.9] Performing "ssh-hostkeys" ...
+[   2.9] Performing "tmp-files" ...
+[   3.0] Performing "udev-persistent-net" ...
+
+=== qemu-img check + info TEMPLATE ===
+No errors were found on the image.
+72520/245760 = 29.51% allocated, 0.00% fragmented, 0.00% compressed clusters
+Image end offset: 4754243584
+image: /var/lib/libvirt/images/ubuntu-template-v1.qcow2
+file format: qcow2
+virtual size: 15 GiB (16106127360 bytes)
+disk size: 4.43 GiB
+cluster_size: 65536
+Format specific information:
+    compat: 1.1
+    compression type: zlib
+
+=== sha256sum TEMPLATE -> preuves/template.sha256 ===
+c41241cb1d6a90cf6abe055d4f9480aa49aa7cb287d5a9dae3eeda6079190805  /var/lib/libvirt/images/ubuntu-template-v1.qcow2

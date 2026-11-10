@@ -1,0 +1,14 @@
+sudo virt-install \
+ --connect qemu:///system \
+ --name "$VM" \
+ --memory 2048 \
+ --vcpus 2 \
+ --disk path="$DISK",size=15,format=qcow2,bus=virtio \
+ --disk path="/var/lib/libvirt/boot/ubuntu.iso",device=cdrom,readonly=on \
+ --disk path="/var/lib/libvirt/boot/ubuntu-vm01-seed.iso",device=cdrom,readonly=on \
+ --network network=default,model=virtio \
+ --channel unix,target_type=virtio,name=org.qemu.guest_agent.0 \
+ --os-variant "$OSVAR" \
+ --boot kernel=/var/lib/libvirt/boot/kernel/vmlinuz,initrd=/var/lib/libvirt/boot/kernel/initrd,kernel_args="autoinstall console=ttyS0,115200n8 ---" \
+ --graphics vnc,listen=127.0.0.1 \
+ --noautoconsole
