@@ -1,0 +1,28 @@
+#cloud-config
+hostname: {{ hostname }}
+manage_etc_hosts: true
+users:
+ - default
+ - name: {{ username }}
+   shell: /bin/bash
+   groups: [sudo]
+   sudo: "ALL=(ALL) NOPASSWD:ALL"
+   lock_passwd: true
+   ssh_authorized_keys:
+   - {{ ssh_public_key }}
+ssh_pwauth: false
+package_update: true
+packages:
+{% for pkg in packages %}
+ - {{ pkg }}
+{% endfor %}
+{% if service is defined %}
+runcmd:
+ - [sh, -c, 'systemctl enable --now {{ service }}']
+{% endif %}
+write_files:
+ - path: /etc/motd
+   content: |
+     Laboratoire BD2C — Cloud-Init
+     Role : {{ role }}
+   permissions: '0644'

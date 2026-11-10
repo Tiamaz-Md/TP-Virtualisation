@@ -1,0 +1,6 @@
+# profiles/db.yml
+packages:
+  - postgresql
+service: postgresql
+role: database
+port: 5432

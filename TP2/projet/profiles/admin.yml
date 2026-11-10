@@ -1,0 +1,8 @@
+# profiles/admin.yml
+packages:
+  - htop
+  - tcpdump
+  - tree
+  - ncdu
+  - net-tools
+role: administration

@@ -1,0 +1,33 @@
+#cloud-config
+hostname: admin01
+manage_etc_hosts: true
+users:
+ - default
+ - name: etudiant
+   shell: /bin/bash
+   groups: [sudo]
+   sudo: "ALL=(ALL) NOPASSWD:ALL"
+   lock_passwd: true
+   ssh_authorized_keys:
+   - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINKJjbZNiSKH4FZQZcqnqYiSlHTdoResU1fQ3Mit3DVc bd2c-tp2
+ssh_pwauth: false
+package_update: true
+packages:
+
+ - htop
+
+ - tcpdump
+
+ - tree
+
+ - ncdu
+
+ - net-tools
+
+
+write_files:
+ - path: /etc/motd
+   content: |
+     Laboratoire BD2C — Cloud-Init
+     Role : administration
+   permissions: '0644'

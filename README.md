@@ -9,7 +9,7 @@ Dépôt de suivi des travaux pratiques du module **Virtualisation et Cloud Compu
 | TP | Sujet | État | Livrable |
 |---|---|---|---|
 | **TP1 — KVM/QEMU et libvirt** (VM, clones, images d'OS, templates) | [`B01_TP1.pdf`](B01_TP1.pdf) | ✅ **Terminé** (2026-11-10) | Scripts & configs : [`TP1/scripts/`](TP1/scripts/) |
-| TP2 — Cloud-init | [`B02_TP2_CloudInit.pdf`](B02_TP2_CloudInit.pdf) | ⏳ À venir | — |
+| **TP2 — Cloud-Init** (NoCloud, profils, Jinja2, multi-VM) | [`B02_TP2_CloudInit.pdf`](B02_TP2_CloudInit.pdf) | ✅ **Terminé** (2026-11-10) | Projet : [`TP2/projet/`](TP2/projet/) |
 
 ## TP1 — Virtualisation avec KVM/QEMU et libvirt
 
@@ -24,13 +24,21 @@ Ce dépôt contient le **code et les fichiers de configuration** utilisés penda
 
 Détail de la chaîne d'usage : [`TP1/scripts/README.md`](TP1/scripts/README.md).
 
-> **Preuves et compte rendu** : les 32 fichiers de preuve (sorties brutes des exercices, XML, checksums, captures d'écran) et le compte rendu complet sont **conservés localement sur la machine de travail** et ne sont pas publiés dans ce dépôt (conformément aux consignes : conserver les gros fichiers localement, ne déposer ni secret ni image).
+> **Preuves et compte rendu** : les fichiers de preuve (sorties brutes des exercices, XML, checksums, captures d'écran) et les comptes rendus complets sont **conservés localement sur la machine de travail** et ne sont pas publiés dans ce dépôt (conformément aux consignes : conserver les gros fichiers localement, ne déposer ni secret ni image).
+
+## TP2 — Cloud-Init (terminé)
+
+Déployé depuis l'image généralisée du TP1 (`base-cloud.qcow2`) : user-data/meta-data/network-config NoCloud, utilisateurs et SSH par clé (`ssh_pwauth: false`), réseau DHCP puis statique, nginx automatisé, **3 profils YAML** (web/db/admin), **template Jinja2** + `generate.py` + inventaire → génération et déploiement de **web01 (nginx), db01 (PostgreSQL 16), admin01 (outils)** en fonctionnement simultané, diagnostic cloud-init (schema/analyze/logs) avec cas d'erreur volontaire corrigé.
+
+Code publié : [`TP2/projet/`](TP2/projet/) — `nocloud/` (seeds), `templates/user-data.j2`, `profiles/`, `inventory/vms.yml`, `generated/`, `generate.py`.
 
 ## Arborescence
 
 ```
 ├── B01_TP1.pdf                 Sujet TP1
 ├── B02_TP2_CloudInit.pdf       Sujet TP2
-└── TP1/
-    └── scripts/                Code/config : env.sh, autoinstall, seeds NoCloud (+ README d'usage)
+├── TP1/
+│   └── scripts/                Code/config : env.sh, autoinstall, seeds NoCloud (+ README d'usage)
+└── TP2/
+    └── projet/                 Code/config : nocloud/, templates/, profiles/, inventory/, generated/, generate.py
 ```

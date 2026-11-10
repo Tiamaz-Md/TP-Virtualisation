@@ -1,0 +1,5 @@
+# profiles/web.yml
+packages:
+  - nginx
+service: nginx
+role: web

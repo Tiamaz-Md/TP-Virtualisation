@@ -1,0 +1,13 @@
+vms:
+  - name: bd2c-web
+    hostname: web01
+    username: etudiant
+    profile: web
+  - name: bd2c-db
+    hostname: db01
+    username: etudiant
+    profile: db
+  - name: bd2c-admin
+    hostname: admin01
+    username: etudiant
+    profile: admin
