@@ -1,14 +1,16 @@
-# Contenu attendu dans `images/` — fichiers volumineux non publiés
+# `images/` — disques des VM du TP1 (copies locales, présentes ici)
 
-Les disques qcow2 des VM (2 à 5 Gio chacun) ne sont pas publiables sur GitHub (limite 100 Mo/fichier).
-Ils vivent dans `/var/lib/libvirt/images/` de l'hôte KVM. Artefacts produits pendant le TP1 :
+Copies locales au format **qcow2 compressé** (`qemu-img convert -c`) : 100 % utilisables
+par qemu/libvirt (`virt-install --import`), au poids réduit pour le transport.
+Les disques d'origine de la séance du 2026-11-10 ont été supprimés de l'hôte pour libérer
+l'espace requis par le TP2 ; ceux-ci sont la **reproduction du 2026-11-11** obtenue en rejouant
+`scripts/02-create-vm.sh` puis `scripts/03-clone-vm.sh` (identités neuves, même procédure).
 
-| Fichier | Taille virtuelle / réelle | Rôle | État |
-|---|---|---|---|
-| `ubuntu-vm01.qcow2` | 15 Gio / ~4,4 Gio | VM source (hostname `srv-source`), installée depuis l'ISO vérifiée via `02-create-vm.sh` | supprimée après capture complète des preuves (espace disque) |
-| `ubuntu-vm02.qcow2` | 15 Gio / ~4,4 Gio | **Clone complet** (Exercice 6) : disque indépendant, sans backing file | supprimée après preuves |
-| `ubuntu-os-capture-v1.qcow2` | 15 Gio / 4,42 Gio | **Image d'OS capturée** (Exercice 7), SHA-256 enregistré dans `preuves/capture.sha256` | supprimée après réimport testé |
-| `ubuntu-restore01.qcow2` | 15 Gio / ~4,4 Gio | **Réimportation testée** (Exercice 8) : démarre sans installation, témoin retrouvé | supprimée après preuves |
+| Fichier | Taille virtuelle / fichier | Rôle |
+|---|---|---|
+| `ubuntu-vm01.qcow2` | 15 Gio / 2,12 Go (compressé) | VM source (hostname `srv-source`), installée depuis l'ISO vérifiée |
+| `ubuntu-vm02.qcow2` | 15 Gio / 2,12 Go (compressé) | **Clone complet** (disque indépendant, sans backing file) |
 
-Preuves correspondantes (locales) : `preuves/06-exercice6-clone.txt`, `preuves/07-exercice7-capture.txt`,
-`preuves/08-exercice8-reimport.txt`, `preuves/capture.sha256`.
+Identités libvirt de la reproduction : UUID `cc7b510c…` / `1c5f9b79…`, MAC `52:54:00:45:ac:29` / `52:54:00:66:34:4c`.
+Les VM d'origine (exécution du 2026-11-10 documentée dans `preuves/`) ont été supprimées de l'hôte ;
+copies exportées via `qemu-img convert -c` le 2026-11-11.

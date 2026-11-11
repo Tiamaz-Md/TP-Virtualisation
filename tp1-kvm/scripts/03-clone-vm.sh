@@ -16,8 +16,10 @@ for _ in $(seq 1 60); do
 done
 [ "$($VIRSH domstate "$SRC" | tr -d '\n')" = "shut off" ] || { echo "La VM source tourne encore"; exit 1; }
 
+# --check disk_size=off : le qcow2 est thin-provisioned (l'allocation réelle du clone
+# reste ~4,4 Gio pour 15 Gio virtuels) ; l'alerte de capacité théorique du pool est levée.
 sudo virt-clone --connect qemu:///system --original "$SRC" --name "$CLONE" \
-  --file "$IMGDIR/$CLONE.qcow2"
+  --file "$IMGDIR/$CLONE.qcow2" --check disk_size=off
 
 echo "=== Identités libvirt (attendues différentes) ==="
 echo "UUID $SRC  : $($VIRSH domuuid "$SRC")"
