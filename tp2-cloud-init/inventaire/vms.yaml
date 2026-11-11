@@ -1,0 +1,25 @@
+# Inventaire des VM — workflow TP2 :
+#   inventaire + profils + templates Jinja2 -> scripts/generate.py -> output/ (user-data,
+#   meta-data, seed ISO) -> scripts/deploy.sh -> KVM/libvirt
+vms:
+  - name: vm-web
+    hostname: web01
+    username: etudiant
+    profile: web
+    os: ubuntu24.04
+    cpu: 2
+    ram: 2048
+  - name: vm-db
+    hostname: db01
+    username: etudiant
+    profile: database
+    os: ubuntu24.04
+    cpu: 2
+    ram: 2048
+  - name: vm-admin
+    hostname: admin01
+    username: etudiant
+    profile: admin
+    os: ubuntu24.04
+    cpu: 2
+    ram: 2048

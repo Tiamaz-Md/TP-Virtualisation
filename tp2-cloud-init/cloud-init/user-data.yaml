@@ -1,0 +1,24 @@
+#cloud-config
+# TP2 — user-data de référence (fusion des exercices 2, 5 et 7)
+hostname: bd2c-vm05
+manage_etc_hosts: true
+users:
+ - default
+ - name: etudiant
+   shell: /bin/bash
+   groups: [sudo]                      # Rocky : [wheel, sudo]
+   sudo: "ALL=(ALL) NOPASSWD:ALL"
+   lock_passwd: true
+   ssh_authorized_keys:
+   - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINKJjbZNiSKH4FZQZcqnqYiSlHTdoResU1fQ3Mit3DVc bd2c-tp2
+ssh_pwauth: false
+package_update: true
+packages:
+ - nginx
+write_files:
+ - path: /etc/motd
+   content: |
+     Laboratoire BD2C — Cloud-Init
+   permissions: '0644'
+runcmd:
+ - [sh, -c, 'systemctl enable --now nginx']

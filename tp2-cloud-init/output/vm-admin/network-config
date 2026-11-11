@@ -1,0 +1,12 @@
+# TP2 — network-config (format v2) rendu par generate.py
+# Correspondance par expression « e* » : robuste quel que soit le nommage de l'interface,
+# qui dépend du type de machine choisi par virt-install
+# (i440fx -> ens2, q35 -> enp1s0). Le nom relevé peut être passé via
+# l'inventaire (interface: ens2) ; à défaut, match universel.
+version: 2
+ethernets:
+
+  all-ifaces:
+    match:
+      name: "e*"
+    dhcp4: true

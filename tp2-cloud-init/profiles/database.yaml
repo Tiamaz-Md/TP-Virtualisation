@@ -1,0 +1,6 @@
+# profiles/database.yaml — profil de service : base de données
+packages:
+  - postgresql
+service: postgresql
+role: database
+port: 5432

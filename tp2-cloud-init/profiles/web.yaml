@@ -1,0 +1,5 @@
+# profiles/web.yaml — profil de service : serveur web
+packages:
+  - nginx
+service: nginx
+role: web

@@ -4,16 +4,15 @@
 *.img
 *.vmdk
 *.vdi
-# Preuves et compte rendu : conservés localement uniquement (non publiés)
-TP1/preuves/
-TP1/RAPPORT.md
-TP2/preuves/
-TP2/projet/preuves/
-TP2/RAPPORT.md
-# Artefacts générés / locaux
-TP2/projet/.venv/
-TP2/projet/.ip-*
-*.seed.iso
+# Preuves et comptes rendus : conservés localement uniquement (non publiés)
+tp1-kvm/preuves/
+tp1-kvm/RAPPORT.md
+tp2-cloud-init/preuves/
+tp2-cloud-init/RAPPORT.md
+# Artefacts locaux
+tp2-cloud-init/.venv/
+TP1/
+TP2/
 # Fichiers temporaires
 *.tmp
 preuves-tmp-*

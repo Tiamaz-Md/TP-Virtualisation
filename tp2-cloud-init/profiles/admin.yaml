@@ -1,0 +1,8 @@
+# profiles/admin.yaml — profil : poste d'administration (aucun service)
+packages:
+  - htop
+  - tcpdump
+  - tree
+  - ncdu
+  - net-tools
+role: administration

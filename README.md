@@ -1,44 +1,24 @@
 # TP Virtualisation et Cloud Computing — Master BD2C (FSAC)
 
-Dépôt de suivi des travaux pratiques du module **Virtualisation et Cloud Computing**.
+Dépôt de suivi des travaux pratiques du module **Virtualisation et Cloud Computing** (2026/2027).
+Les fichiers volumineux (ISO, images qcow2) et les preuves/comptes rendus restent **locaux** (voir les README de chaque TP).
 
-> Étudiant : Mouad T. — Année universitaire 2026/2027 — Ce dépôt permet de suivre l'avancement du projet : chaque partie terminée est poussée avec son code/config.
-
-## État d'avancement
-
-| TP | Sujet | État | Livrable |
+| TP | Sujet | État | Code |
 |---|---|---|---|
-| **TP1 — KVM/QEMU et libvirt** (VM, clones, images d'OS, templates) | [`B01_TP1.pdf`](B01_TP1.pdf) | ✅ **Terminé** (2026-11-10) | Scripts & configs : [`TP1/scripts/`](TP1/scripts/) |
-| **TP2 — Cloud-Init** (NoCloud, profils, Jinja2, multi-VM) | [`B02_TP2_CloudInit.pdf`](B02_TP2_CloudInit.pdf) | ✅ **Terminé** (2026-11-10) | Projet : [`TP2/projet/`](TP2/projet/) |
+| **TP1 — KVM/QEMU et libvirt** | [`B01_TP1.pdf`](B01_TP1.pdf) | ✅ Terminé (2026-11-10) | [`tp1-kvm/scripts/`](tp1-kvm/scripts/) |
+| **TP2 — Cloud-Init** | [`B02_TP2_CloudInit.pdf`](B02_TP2_CloudInit.pdf) | ✅ Terminé (2026-11-10) | [`tp2-cloud-init/`](tp2-cloud-init/) |
 
-## TP1 — Virtualisation avec KVM/QEMU et libvirt
+## TP1 — KVM/QEMU et libvirt (`tp1-kvm/`)
 
-Environnement : hôte **Ubuntu Server 26.10** dans VMware Workstation (virtualisation imbriquée → `/dev/kvm`), VM source installée depuis l'ISO officielle **Ubuntu 24.04.5 Server** (checksum officiel vérifié). Parcours **Ubuntu**.
+VM installée depuis une ISO officielle vérifiée, clone complet avec analyse des identités, capture d'image d'OS réimportée, template généralisé (`virt-sysprep`) — scripts reproductibles `01-install-kvm.sh` → `05-manage-vm.sh`.
 
-Ce dépôt contient le **code et les fichiers de configuration** utilisés pendant le TP ([`TP1/scripts/`](TP1/scripts/)) :
+## TP2 — Cloud-Init (`tp2-cloud-init/`)
 
-- `env.sh` — variables du parcours Ubuntu + utilitaires (attente d'arrêt, récupération d'IP, attente SSH)
-- `install-command.sh` — `virt-install` de la VM source (autoinstall via boot direct kernel + seed `cidata`)
-- `vm1-autoinstall-user-data` / `vm1-autoinstall-meta-data` — configuration autoinstall de `srv-source`
-- `app01-nocloud-user-data` / `app01-nocloud-meta-data` — seeds cloud-init NoCloud des instances app01/app02
-
-Détail de la chaîne d'usage : [`TP1/scripts/README.md`](TP1/scripts/README.md).
-
-> **Preuves et compte rendu** : les fichiers de preuve (sorties brutes des exercices, XML, checksums, captures d'écran) et les comptes rendus complets sont **conservés localement sur la machine de travail** et ne sont pas publiés dans ce dépôt (conformément aux consignes : conserver les gros fichiers localement, ne déposer ni secret ni image).
-
-## TP2 — Cloud-Init (terminé)
-
-Déployé depuis l'image généralisée du TP1 (`base-cloud.qcow2`) : user-data/meta-data/network-config NoCloud, utilisateurs et SSH par clé (`ssh_pwauth: false`), réseau DHCP puis statique, nginx automatisé, **3 profils YAML** (web/db/admin), **template Jinja2** + `generate.py` + inventaire → génération et déploiement de **web01 (nginx), db01 (PostgreSQL 16), admin01 (outils)** en fonctionnement simultané, diagnostic cloud-init (schema/analyze/logs) avec cas d'erreur volontaire corrigé.
-
-Code publié : [`TP2/projet/`](TP2/projet/) — `nocloud/` (seeds), `templates/user-data.j2`, `profiles/`, `inventory/vms.yml`, `generated/`, `generate.py`.
-
-## Arborescence
+Déploiement automatisé depuis l'image généralisée du TP1 : seeds NoCloud, SSH par clé, réseau DHCP/statique, nginx ; profils YAML (web/database/admin) + templates Jinja2 + inventaire → `generate.py` → `deploy.sh` → **web01** (nginx), **db01** (PostgreSQL), **admin01**.
 
 ```
-├── B01_TP1.pdf                 Sujet TP1
-├── B02_TP2_CloudInit.pdf       Sujet TP2
-├── TP1/
-│   └── scripts/                Code/config : env.sh, autoinstall, seeds NoCloud (+ README d'usage)
-└── TP2/
-    └── projet/                 Code/config : nocloud/, templates/, profiles/, inventory/, generated/, generate.py
+TP1 :  scripts/01..05  (install, create, clone, template, manage)
+TP2 :  inventaire/vms.yaml + profiles/ + templates/ -> generate.py -> output/ -> deploy.sh -> KVM
 ```
+
+> Environnement : hôte Ubuntu Server dans VMware Workstation (virtualisation imbriquée), invités Ubuntu 24.04 Server. Parcours Ubuntu.
